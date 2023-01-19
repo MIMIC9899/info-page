@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Страница</title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="libs/gsap/gsap.min.js" defer></script>
+    <script src="libs/gsap/ScrollTrigger.min.js" defer></script>
+    <script src="libs/gsap/ScrollSmoother.min.js" defer></script>
+
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div id="ink-cursor" class="ink-cursor"></div>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+            <div id="ink-cursor" class="ink-cursor"><style>
+
+                /* Ink Cursor */
+                .goo {
+                    position: absolute;
+                    top: 0;
+                }
+            
+            
+                .ink-cursor {
+                    pointer-events: none;
+                    position: fixed;
+                    display: block;
+                    border-radius: 0;
+                    -webkit-transform-origin: center center;
+                    transform-origin: center center;
+                    mix-blend-mode: difference;
+                    top: 0;
+                    left: 0;
+                    z-index: 9999999;
+                    -webkit-filter: url("#goo");
+                    filter: url("#goo");
+                }
+            
+                .ink-cursor span {
+                    position: absolute;
+                    display: block;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 20px;
+                    background-color: #fff;
+                    -webkit-transform-origin: center center;
+                    transform-origin: center center;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+            
+                @media (max-width: 991px) {
+            
+                    .ink-cursor,
+                    .ink-cursor span {
+                        display: none
+                    }
+                }
+              
+            
+            </style></div>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+            <div id="ink-cursor" class="ink-cursor"><script>
+                let cursorInit=!1;const cursor=document.getElementById("ink-cursor"),amount=20,sineDots=Math.floor(.3*amount),width=26,idleTimeout=150;let timeoutID,hoverButton,hoverTL,lastFrame=0,mousePosition={x:0,y:0},dots=[],idle=!1;class HoverButton{constructor(e){this.hovered=!1,this.animatingHover=!1,this.forceOut=!1,this.timing=.65,this.el=document.getElementById(e)}onMouseEnter(){this.hoverInAnim()}hoverInAnim(){this.hovered||(this.hovered=!0,this.animatingHover=!0,this.forceOut=!1,TweenMax.fromTo(this.bg,this.timing,{x:"-112%"},{x:"-12%",ease:Power3.easeOut,onComplete:()=>{this.animatingHover=!1,this.forceOut&&(this.foceOut=!1,this.hoverOutAnim())}}))}onMouseLeave(){this.animatingHover?this.forceOut=!0:this.hoverOutAnim()}hoverOutAnim(){this.hovered=!1,TweenMax.to(this.bg,this.timing,{x:"100%",ease:Power3.easeOut,onComplete:()=>{}})}}class Dot{constructor(e=0){this.index=e,this.anglespeed=.05,this.x=0,this.y=0,this.scale=1-.05*e,this.range=width/2-width/2*this.scale+2,this.limit=.75*width*this.scale,this.element=document.createElement("span"),TweenMax.set(this.element,{scale:this.scale}),cursor.appendChild(this.element)}lock(){this.lockX=this.x,this.lockY=this.y,this.angleX=2*Math.PI*Math.random(),this.angleY=2*Math.PI*Math.random()}draw(e){!idle||this.index<=sineDots?TweenMax.set(this.element,{x:this.x,y:this.y}):(this.angleX+=this.anglespeed,this.angleY+=this.anglespeed,this.y=this.lockY+Math.sin(this.angleY)*this.range,this.x=this.lockX+Math.sin(this.angleX)*this.range,TweenMax.set(this.element,{x:this.x,y:this.y}))}}class Circle{constructor(e){const t=document.getElementById(e);t.parentElement.removeChild(t)}}function init(){window.addEventListener("mousemove",onMouseMove),window.addEventListener("touchmove",onTouchMove),hoverButton=new HoverButton("button"),lastFrame+=new Date,buildDots(),render()}function startIdleTimer(){timeoutID=setTimeout(goInactive,idleTimeout),idle=!1}function resetIdleTimer(){clearTimeout(timeoutID),startIdleTimer()}function goInactive(){idle=!0;for(let e of dots)e.lock()}function buildDots(){for(let e=0;e<amount;e++){let t=new Dot(e);dots.push(t)}}const onMouseMove=e=>{mousePosition.x=e.clientX-width/2,mousePosition.y=e.clientY-width/2,resetIdleTimer()},onTouchMove=()=>{mousePosition.x=event.touches[0].clientX-width/2,mousePosition.y=event.touches[0].clientY-width/2,resetIdleTimer()},render=e=>{positionCursor(e-lastFrame),lastFrame=e,requestAnimationFrame(render)},positionCursor=e=>{let t=mousePosition.x,i=mousePosition.y;dots.forEach((o,s,n)=>{let h=n[s+1]||n[0];if(o.x=t,o.y=i,o.draw(e),!idle||s<=sineDots){const e=.35*(h.x-o.x),s=.35*(h.y-o.y);t+=e,i+=s}})},inkTablet=window.matchMedia("(max-width: 991px)"),inkMobile=window.matchMedia("(max-width: 479px)"),inkMediaObserver=()=>{inkMobile.matches||inkTablet.matches||cursorInit||(cursorInit=!0,init())};inkMediaObserver(),inkTablet.addListener(inkMediaObserver),inkMobile.addListener(inkMediaObserver);
+                </script></div>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+         
+
+
+            <article class="main-article" style="background-image: url(img/dungeon.jpg);">
+                <div class="main-article__content">
+                    <div class="content1">
+                        <div class="tabs">
+                            <nav class="tabs__items">
+                                <a href="#tab_01" class="tabs__item"><span>1 Вкладка</span></a>
+                                <a href="#tab_02" class="tabs__item"><span>2 Вкладка</span></a>
+                                <a href="#tab_03" class="tabs__item"><span>3 Вкладка</span></a>
+                            </nav>
+                            <div class="tabs__body">
+                                <div id="tab_01" class="tabs__block">
+                                    В детстве (2-4 класс) я говорил маме, что мне нравится одна девочка, и мама мне давала в школу 2 шоколадки, но на самом деле мне никто не нравился и я просто сам все сжирал.
+                                </div>
+                                <div id="tab_02" class="tabs__block">
+                                    В «В контакте» состою в группе тезок по фамилии и имени. Собрались мы как-то встретиться, по пиву хряпнуть. Подтянулись 12 человек. Когда были уже изрядно пьяные, нарвались на ментов. Видели б вы их обалдевшие лица, когда они наши документы проверяли!
+                                </div>
+                                <div id="tab_03" class="tabs__block">
+                                    Один человек заблудился в лесу. Он долго блуждал и, в конце концов, в сумерках натолкнулся на хижину. Внутри никого не было, и он решил лечь спать. Но он долго не мог заснуть, потому что на стенах висели портреты каких-то людей, и ему казалось, что они зловеще смотрят на него. В конце концов он заснул от усталости. Утром его разбудил яркий солнечный свет. На стенах не было никаких картин. Это были окна.
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="text">Этот текст исчезает, если навести на него курсор. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                    </div>
+                    <a class="main-article__paragraph" href="index.html">Вернуться на главную страницу</a>
+                </div>
+
+            </article>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
